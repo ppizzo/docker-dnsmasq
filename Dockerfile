@@ -6,7 +6,9 @@ MAINTAINER pietro.pizzo@gmail.com
 COPY sources.list /etc/apt/
 
 # Packages install and housekeeping
-RUN apt-get update && apt-get install -y dnsmasq && apt-get clean && rm -rf /var/lib/apt/lists/* /usr/share/doc* /usr/share/man/* /usr/share/info/*
+RUN echo "Europe/Rome" >/etc/timezone && dpkg-reconfigure -f noninteractive tzdata && \
+    apt-get update && apt-get install -y dnsmasq && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /usr/share/doc* /usr/share/man/* /usr/share/info/*
 
 EXPOSE 53
 
